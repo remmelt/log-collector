@@ -1,11 +1,6 @@
 ---
-  - name: Add repository for nginx
-    copy: 
-      src=ansible-bootstrap-ngix.repo 
-      dest=/etc/yum.repos.d/ansible-bootstrap-ngix.repo
-
   - name: Install Nginx
-    yum: state=present name=nginx enablerepo=nginx
+    apt: state=present name=nginx
     sudo: yes
     notify: Restart Nginx
 
@@ -25,10 +20,11 @@
       src=/usr/share/nginx/kibana-3.0.0milestone5
       dest=/usr/share/nginx/kibana
     register: kibana_dir_present
+    sudo: yes
 
   - name: Download Kibana
     get_url: 
-      url=https://download.elasticsearch.org/kibana/kibana/kibana-3.0.0milestone5.tar.gz
+      url=http://download.elasticsearch.org/kibana/kibana/kibana-3.0.0milestone5.tar.gz
       dest=~/kibana.tar.gz
     sudo: yes
     when: kibana_dir_present.changed
@@ -44,13 +40,13 @@
       dest=/usr/share/nginx/kibana/config.js
     sudo: yes
 
-  - name: Change iptables 
-    lineinfile: 
-      dest=/etc/sysconfig/iptables 
-      insertbefore="^-A INPUT -j REJECT.*" 
-      line="-A INPUT -m state --state NEW -m tcp -p tcp --dport {{ item }} -j ACCEPT"
-    sudo: yes
-    notify: Restart iptables
-    with_items:
-    - 80
-    - 443
+  # - name: Change iptables 
+  #   lineinfile: 
+  #     dest=/etc/sysconfig/iptables 
+  #     insertbefore="^-A INPUT -j REJECT.*" 
+  #     line="-A INPUT -m state --state NEW -m tcp -p tcp --dport {{ item }} -j ACCEPT"
+  #   sudo: yes
+  #   notify: Restart iptables
+  #   with_items:
+  #   - 80
+  #   - 443

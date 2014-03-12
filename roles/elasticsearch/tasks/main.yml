@@ -1,6 +1,6 @@
 ---
 - name: Install dependencies
-  yum: state=present name=java-1.7.0-openjdk
+  apt: state=present name=openjdk-7-jre-headless
   sudo: true
 
 - name: Install Elasticsearch
@@ -21,10 +21,10 @@
   sudo: yes
   notify: Restart Elasticsearch
  
-- name: Change iptables 
-  lineinfile: 
-    dest=/etc/sysconfig/iptables 
-    insertbefore="^-A INPUT -j REJECT.*" 
-    line="-A INPUT -m state --state NEW -m tcp -p tcp --dport 9200 -j ACCEPT"
-  sudo: yes
-  notify: Restart iptables
+# - name: Change iptables 
+#   lineinfile: 
+#     dest=/etc/sysconfig/iptables 
+#     insertbefore="^-A INPUT -j REJECT.*" 
+#     line="-A INPUT -m state --state NEW -m tcp -p tcp --dport 9200 -j ACCEPT"
+#   sudo: yes
+#   notify: Restart iptables
