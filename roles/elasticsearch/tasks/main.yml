@@ -3,21 +3,39 @@
   apt: state=present name=openjdk-7-jre-headless
   sudo: true
 
+- name: Check if Elasticsearch is installed
+  shell: dpkg --get-selections|egrep 'elasticsearch\s*install'
+  changed_when: false
+  ignore_errors: true
+  register: elasticsearch_present
+
+- name: Download Elasticsearch
+  get_url: 
+    url=http://download.elasticsearch.org/elasticsearch/elasticsearch/elasticsearch-1.0.1.deb
+    dest=/tmp/elasticsearch-1.0.1.deb
+  when: elasticsearch_present.rc != 0
+
 - name: Install Elasticsearch
-  yum: state=present 
-       name=https://download.elasticsearch.org/elasticsearch/elasticsearch/elasticsearch-1.0.1.noarch.rpm
+  command: dpkg -i /tmp/elasticsearch-1.0.1.deb
+  when: elasticsearch_present.rc != 0
   sudo: yes
-  notify: Restart Elasticsearch
+
+- name: Start Elasticsearch on boot
+  command: update-rc.d elasticsearch defaults 95 10
+  sudo: yes
+  when: elasticsearch_present.rc != 0
 
 - name: Elasticsearch configuration
   template:
-   src=elasticsearch.yml
-   dest=/etc/elasticsearch/elasticsearch.yml
+    src=elasticsearch.yml
+    dest=/etc/elasticsearch/elasticsearch.yml
   sudo: yes
   notify: Restart Elasticsearch
 
 - name: Elasticsearch logging configuration
-  copy: src=logging.yml dest=/etc/elasticsearch/logging.yml
+  copy: 
+    src=logging.yml 
+    dest=/etc/elasticsearch/logging.yml
   sudo: yes
   notify: Restart Elasticsearch
  
