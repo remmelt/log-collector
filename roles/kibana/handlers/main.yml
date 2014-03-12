@@ -1,0 +1,9 @@
+---
+- name: Restart Nginx
+  service: name=nginx state=restarted
+  sudo: yes
+  
+- name: Restart iptables
+  service: name=iptables state=restarted
+  sudo: yes
+  

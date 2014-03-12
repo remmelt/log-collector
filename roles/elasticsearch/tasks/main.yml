@@ -1,0 +1,30 @@
+---
+- name: Install dependencies
+  yum: state=present name=java-1.7.0-openjdk
+  sudo: true
+
+- name: Install Elasticsearch
+  yum: state=present 
+       name=https://download.elasticsearch.org/elasticsearch/elasticsearch/elasticsearch-1.0.1.noarch.rpm
+  sudo: yes
+  notify: Restart Elasticsearch
+
+- name: Elasticsearch configuration
+  template:
+   src=elasticsearch.yml
+   dest=/etc/elasticsearch/elasticsearch.yml
+  sudo: yes
+  notify: Restart Elasticsearch
+
+- name: Elasticsearch logging configuration
+  copy: src=logging.yml dest=/etc/elasticsearch/logging.yml
+  sudo: yes
+  notify: Restart Elasticsearch
+ 
+- name: Change iptables 
+  lineinfile: 
+    dest=/etc/sysconfig/iptables 
+    insertbefore="^-A INPUT -j REJECT.*" 
+    line="-A INPUT -m state --state NEW -m tcp -p tcp --dport 9200 -j ACCEPT"
+  sudo: yes
+  notify: Restart iptables

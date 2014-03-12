@@ -1,0 +1,18 @@
+---
+#- include: create-droplets.yml
+
+- hosts: storage
+  user: '{{ ssh_username }}'
+  roles:
+  - elasticsearch
+
+- hosts: webhost
+  user: '{{ ssh_username }}'
+  roles:
+  - kibana
+
+- hosts: queue
+  user: '{{ ssh_username }}'
+  roles:
+  - redis
+  - indexer
