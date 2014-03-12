@@ -1,12 +1,12 @@
 Vagrant.configure("2") do |config|
 
-  config.vm.box = "ubLTX"
-  #config.vm.box_url = "http://dl.dropbox.com/u/1537815/precise64.box"
+  config.vm.box = "ubuntu12.04"
+  config.vm.box_url = "https://dl.dropbox.com/s/gd3rzuumwgeuqcp/ubuntu12.04.box"
   
-  # config.vm.define "es2" do |node|
-  #   node.vm.network :private_network, ip: "10.30.50.201"
-  #   node.vm.hostname = "es2"
-  # end
+  config.vm.define "es2" do |node|
+    node.vm.network :private_network, ip: "10.30.50.201"
+    node.vm.hostname = "es2"
+  end
   
   config.vm.define "es1" do |node|
     node.vm.network :private_network, ip: "10.30.50.200"

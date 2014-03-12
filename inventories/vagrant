@@ -6,7 +6,7 @@ redis
 
 [storage]
 es1 publish_host=10.30.50.200
-# es2 publish_host=10.30.50.201
+es2 publish_host=10.30.50.201
 
 [all:vars]
 ssh_username=vagrant
