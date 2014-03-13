@@ -206,11 +206,11 @@
 # set, it is automatically derived. It must point to an actual IP address.
 #
 # network.publish_host: 192.168.0.1
-network.publish_host: {{ publish_host }}
+# network.publish_host: {{ publish_host }}
 
 # Set both 'bind_host' and 'publish_host':
 #
-# network.host: 192.168.0.1
+network.host: {{ ip }}
 
 # Set a custom port for the node to node communication (9300 by default):
 #
@@ -319,13 +319,13 @@ network.publish_host: {{ publish_host }}
 #
 # 1. Disable multicast discovery (enabled by default):
 #
-discovery.zen.ping.multicast.enabled: false
+discovery.zen.ping.multicast.enabled: true
 
 #
 # 2. Configure an initial list of master nodes in the cluster
 #    to perform discovery when new nodes (master or data) are started:
 #
-discovery.zen.ping.unicast.hosts: ["es1", "es2"]
+#discovery.zen.ping.unicast.hosts: ["es1", "es2"]
 
 # EC2 discovery allows to use AWS EC2 API in order to perform discovery.
 #

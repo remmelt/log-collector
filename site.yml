@@ -1,5 +1,9 @@
 ---
-#- include: create-droplets.yml
+
+- hosts: all
+  user: '{{ ssh_username }}'
+  roles:
+  - ubuntu
 
 - hosts: storage
   user: '{{ ssh_username }}'

@@ -3,27 +3,24 @@
   apt: state=present name=openjdk-7-jre-headless
   sudo: true
 
-- name: Check if Elasticsearch is installed
-  shell: dpkg --get-selections|egrep 'elasticsearch\s*install'
-  changed_when: false
-  ignore_errors: true
-  register: elasticsearch_present
+- name: Install Elasticsearch apt key
+  apt_key:
+    url=http://packages.elasticsearch.org/GPG-KEY-elasticsearch
+    state=present
+  sudo: yes
 
-- name: Download Elasticsearch
-  get_url: 
-    url=http://download.elasticsearch.org/elasticsearch/elasticsearch/elasticsearch-1.0.1.deb
-    dest=/tmp/elasticsearch-1.0.1.deb
-  when: elasticsearch_present.rc != 0
+- name: Add Elasticsearch repository
+  apt_repository:
+    repo="deb http://packages.elasticsearch.org/elasticsearch/1.0/debian stable main"
+    update_cache=yes
+    state=present
+  sudo: yes
 
 - name: Install Elasticsearch
-  command: dpkg -i /tmp/elasticsearch-1.0.1.deb
-  when: elasticsearch_present.rc != 0
+  apt:
+    pkg=elasticsearch
+    state=present
   sudo: yes
-
-- name: Start Elasticsearch on boot
-  command: update-rc.d elasticsearch defaults 95 10
-  sudo: yes
-  when: elasticsearch_present.rc != 0
 
 - name: Elasticsearch configuration
   template:
@@ -33,16 +30,12 @@
   notify: Restart Elasticsearch
 
 - name: Elasticsearch logging configuration
-  copy: 
-    src=logging.yml 
+  copy:
+    src=logging.yml
     dest=/etc/elasticsearch/logging.yml
   sudo: yes
   notify: Restart Elasticsearch
- 
-# - name: Change iptables 
-#   lineinfile: 
-#     dest=/etc/sysconfig/iptables 
-#     insertbefore="^-A INPUT -j REJECT.*" 
-#     line="-A INPUT -m state --state NEW -m tcp -p tcp --dport 9200 -j ACCEPT"
-#   sudo: yes
-#   notify: Restart iptables
+
+- name: Ensure Elasticsearch is running
+  service: name=elasticsearch state=started
+  sudo: yes

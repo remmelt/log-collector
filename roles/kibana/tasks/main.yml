@@ -5,14 +5,11 @@
     notify: Restart Nginx
 
   - name: Nginx conf
-    template: 
+    template:
       src=nginx_default.conf
       dest=/etc/nginx/conf.d/default.conf
     sudo: yes
     notify: Restart Nginx
-
-  - name: Edit /etc/hosts
-    debug: msg=TODO
 
   - name: Check for Kibana directory
     file:
@@ -23,7 +20,7 @@
     sudo: yes
 
   - name: Download Kibana
-    get_url: 
+    get_url:
       url=http://download.elasticsearch.org/kibana/kibana/kibana-3.0.0milestone5.tar.gz
       dest=~/kibana.tar.gz
     sudo: yes
@@ -35,18 +32,11 @@
     when: kibana_dir_present.changed
 
   - name: Edit Kibana config
-    template: 
+    template:
       src=kibana_config.js
       dest=/usr/share/nginx/kibana/config.js
     sudo: yes
 
-  # - name: Change iptables 
-  #   lineinfile: 
-  #     dest=/etc/sysconfig/iptables 
-  #     insertbefore="^-A INPUT -j REJECT.*" 
-  #     line="-A INPUT -m state --state NEW -m tcp -p tcp --dport {{ item }} -j ACCEPT"
-  #   sudo: yes
-  #   notify: Restart iptables
-  #   with_items:
-  #   - 80
-  #   - 443
+  - name: Ensure Nginx is running
+    service: name=nginx state=started
+    sudo: yes
