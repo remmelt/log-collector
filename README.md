@@ -67,6 +67,7 @@ Further reading
 ---------------
 
 - [Logstash documentation](http://logstash.net/docs/1.3.3/tutorials/getting-started-centralized)
+- [Bigdesk ES cluster overview](http://bigdesk.org/v/)
 
 
 TODO
