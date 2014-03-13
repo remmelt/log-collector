@@ -39,3 +39,12 @@
 - name: Ensure Elasticsearch is running
   service: name=elasticsearch state=started
   sudo: yes
+
+- name: Register hostname with reverse proxy host
+  lineinfile:
+    state=present
+    name=/etc/hosts
+    line="{{ ip }} {{ inventory_hostname }}"
+    regexp="[0-9.]*\s*{{ inventory_hostname }}"
+  sudo: yes
+  delegate_to: "{{ reverse_proxy_host }}"

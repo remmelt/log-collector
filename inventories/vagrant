@@ -10,5 +10,6 @@ es2 ip=10.30.50.201
 
 [all:vars]
 ssh_username=vagrant
-queue_host=redis
-storage_cluster=10.30.50.200
+queue_host=10.30.50.100
+storage_cluster=10.30.50.100
+reverse_proxy_host=redis

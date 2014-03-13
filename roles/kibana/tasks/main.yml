@@ -5,9 +5,9 @@
     notify: Restart Nginx
 
   - name: Nginx conf
-    template:
-      src=nginx_default.conf
-      dest=/etc/nginx/conf.d/default.conf
+    copy:
+      src=nginx_kibana.conf
+      dest=/etc/nginx/conf.d/kibana.conf
     sudo: yes
     notify: Restart Nginx
 

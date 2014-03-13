@@ -1,0 +1,12 @@
+---
+  - name: Install Nginx
+    apt: state=present name=nginx
+    sudo: yes
+    notify: Restart Nginx
+
+  - name: Nginx conf
+    template:
+      src=nginx_proxy_es.conf
+      dest=/etc/nginx/conf.d/nginx_proxy_es.conf
+    sudo: yes
+    notify: Restart Nginx

@@ -2,7 +2,7 @@ define(['settings'],
 function (Settings) {
 
   return new Settings({
-    elasticsearch: "http://{{ queue_host }}/",
+    elasticsearch: "http://{{ queue_host }}:9200/",
 
     default_route: '/dashboard/file/default.json',
     kibana_index: "kibana-int",

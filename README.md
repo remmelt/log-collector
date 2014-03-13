@@ -63,6 +63,4 @@ Further reading
 TODO
 ----
 
-- Automatically start services (use Tanuki wrapper for starting logstash.jar?)
-- Actual clustering/lb of the es machines (using nginx?)
 - Security
