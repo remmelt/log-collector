@@ -206,11 +206,10 @@
 # set, it is automatically derived. It must point to an actual IP address.
 #
 # network.publish_host: 192.168.0.1
-# network.publish_host: {{ publish_host }}
 
 # Set both 'bind_host' and 'publish_host':
 #
-network.host: {{ ip }}
+network.host: {{ ansible_ssh_host }}
 
 # Set a custom port for the node to node communication (9300 by default):
 #

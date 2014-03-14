@@ -11,25 +11,33 @@
     sudo: yes
     notify: Restart Nginx
 
-  - name: Check for Kibana directory
+  - name: Check for Kibana installation
     file:
-      state=link
-      src=/usr/share/nginx/kibana-3.0.0milestone5
-      dest=/usr/share/nginx/kibana
-    register: kibana_dir_present
+      state=file
+      name=/usr/share/nginx/kibana-3.0.0milestone5/config.js
+    register: kibana_install_present
     sudo: yes
+    ignore_errors: true
 
   - name: Download Kibana
     get_url:
       url=http://download.elasticsearch.org/kibana/kibana/kibana-3.0.0milestone5.tar.gz
-      dest=~/kibana.tar.gz
+      dest=/tmp/kibana.tar.gz
+      sha256sum=c17c3c86c57b249d5188125ed20a01cd97347d32fddcbe05a35a663b76020dc3
     sudo: yes
-    when: kibana_dir_present.changed
+    when: kibana_install_present.state == 'absent'
 
   - name: Unzip Kibana
-    shell: tar xf ~/kibana.tar.gz -C /usr/share/nginx
+    shell: tar xf /tmp/kibana.tar.gz -C /usr/share/nginx
     sudo: yes
-    when: kibana_dir_present.changed
+    when: kibana_install_present.state == 'absent'
+
+  - name: Create Kibana directory link
+    file:
+      state=link
+      src=/usr/share/nginx/kibana-3.0.0milestone5
+      dest=/usr/share/nginx/kibana
+    sudo: yes
 
   - name: Edit Kibana config
     template:

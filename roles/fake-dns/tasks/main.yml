@@ -1,0 +1,8 @@
+---
+
+- name: Update /etc/hosts
+  template:
+    src=hosts.j2
+    dest=/etc/hosts
+  sudo: yes
+  when: fake_dns

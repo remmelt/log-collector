@@ -2,6 +2,13 @@ Log Collector
 =============
 
 
+Requirements
+------------
+
+- Vagrant 1.5.0 or newer
+- Ansible, tested on 1.5.3
+
+
 First run
 ---------
 

@@ -1,15 +1,17 @@
 [queue]
-redis
+redis ansible_ssh_host=10.30.50.100
 
 [webhost]
 redis
 
 [storage]
-es1 ip=10.30.50.200
-es2 ip=10.30.50.201
+es1 ansible_ssh_host=10.30.50.200
+#es2 ansible_ssh_host=10.30.50.201
+#es3 ansible_ssh_host=10.30.50.202
 
 [all:vars]
 ssh_username=vagrant
 queue_host=10.30.50.100
 storage_cluster=10.30.50.100
 reverse_proxy_host=redis
+fake_dns=true
