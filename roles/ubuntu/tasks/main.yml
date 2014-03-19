@@ -1,17 +1,8 @@
 ---
-  - name: Install prerequisites
-    apt:
-      pkg={{item}}
-      state=present
-      update_cache=yes
-    with_items:
-      - python-apt
-      - python-pycurl   # Not present on default installs, required for apt_repository
+  - include: manage-os.yml
     sudo: yes
+    when: manage_os
 
   - include: unattended-upgrades.yml
     sudo: yes
-
-  - name: Update packages
-    apt: upgrade=safe
-    sudo: yes
+    when: manage_os

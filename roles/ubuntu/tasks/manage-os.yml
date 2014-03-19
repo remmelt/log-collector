@@ -1,0 +1,18 @@
+---
+  - name: Select Dutch ubuntu mirror
+    command: sed -ie "s/http:\/\/us/http:\/\/nl/" /etc/apt/sources.list
+
+  - name: Reload apt cache
+    apt: update_cache=yes
+
+  - name: Update packages
+    apt: upgrade=safe
+
+  - name: Install prerequisites
+    apt:
+      pkg={{item}}
+      state=present
+      update_cache=yes
+    with_items:
+      - python-apt
+      - python-pycurl

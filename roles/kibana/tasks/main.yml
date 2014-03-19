@@ -45,6 +45,15 @@
       dest=/usr/share/nginx/kibana/config.js
     sudo: yes
 
+  - name: Copy dashboards
+    copy:
+      src="{{ item }}"
+      dest="/usr/share/nginx/kibana/app/dashboards/{{ item | basename }}"
+    with_fileglob:
+      - ./dashboards/*
+    tags: copy_dashboards
+    sudo: yes
+
   - name: Ensure Nginx is running
     service: name=nginx state=started
     sudo: yes
