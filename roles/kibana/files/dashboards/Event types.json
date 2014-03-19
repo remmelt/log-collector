@@ -38,13 +38,23 @@
           "type": "lucene",
           "enable": true,
           "query": "Severity:error"
+        },
+        "4": {
+          "id": 4,
+          "color": "#E24D42",
+          "alias": "",
+          "pin": true,
+          "type": "lucene",
+          "enable": true,
+          "query": "*Bod geplaatst"
         }
       },
       "ids": [
         0,
         1,
         2,
-        3
+        3,
+        4
       ]
     },
     "filter": {
@@ -85,7 +95,7 @@
           "value_field": null,
           "auto_int": true,
           "resolution": 100,
-          "interval": "30s",
+          "interval": "5m",
           "fill": 3,
           "linewidth": 3,
           "timezone": "browser",
@@ -268,7 +278,7 @@
           },
           "auto_int": true,
           "resolution": 100,
-          "interval": "30s",
+          "interval": "5m",
           "intervals": [
             "auto",
             "1s",
