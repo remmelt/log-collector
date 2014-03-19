@@ -52,7 +52,7 @@
         "0": {
           "type": "time",
           "field": "@timestamp",
-          "from": "now-5m",
+          "from": "now-6h",
           "to": "now",
           "mandate": "must",
           "active": true,
@@ -85,7 +85,7 @@
           "value_field": null,
           "auto_int": true,
           "resolution": 100,
-          "interval": "1s",
+          "interval": "5m",
           "fill": 3,
           "linewidth": 3,
           "timezone": "browser",
@@ -364,5 +364,5 @@
     "load_local": true,
     "hide": false
   },
-  "refresh": "10s"
+  "refresh": "1m"
 }
