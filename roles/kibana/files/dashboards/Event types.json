@@ -85,7 +85,7 @@
           "value_field": null,
           "auto_int": true,
           "resolution": 100,
-          "interval": "5m",
+          "interval": "30s",
           "fill": 3,
           "linewidth": 3,
           "timezone": "browser",
@@ -101,7 +101,7 @@
           "percentage": false,
           "interactive": true,
           "queries": {
-            "mode": "all",
+            "mode": "selected",
             "ids": [
               0,
               1,
@@ -180,7 +180,8 @@
               0,
               1,
               2,
-              3
+              3,
+              4
             ]
           },
           "tmode": "terms",
@@ -215,12 +216,96 @@
               0,
               1,
               2,
-              3
+              3,
+              4
             ]
           },
           "tmode": "terms",
           "tstat": "total",
           "valuefield": ""
+        }
+      ],
+      "notice": false
+    },
+    {
+      "title": "Bids",
+      "height": "150px",
+      "editable": true,
+      "collapse": false,
+      "collapsable": true,
+      "panels": [
+        {
+          "span": 8,
+          "editable": true,
+          "type": "histogram",
+          "loadingEditor": false,
+          "mode": "count",
+          "time_field": "@timestamp",
+          "value_field": null,
+          "x-axis": true,
+          "y-axis": true,
+          "scale": 1,
+          "y_format": "none",
+          "grid": {
+            "max": null,
+            "min": 0
+          },
+          "queries": {
+            "mode": "selected",
+            "ids": [
+              4
+            ]
+          },
+          "annotate": {
+            "enable": false,
+            "query": "*Bod geplaatst",
+            "size": 20,
+            "field": "_type",
+            "sort": [
+              "_score",
+              "desc"
+            ]
+          },
+          "auto_int": true,
+          "resolution": 100,
+          "interval": "30s",
+          "intervals": [
+            "auto",
+            "1s",
+            "1m",
+            "5m",
+            "10m",
+            "30m",
+            "1h",
+            "3h",
+            "12h",
+            "1d",
+            "1w",
+            "1y"
+          ],
+          "lines": true,
+          "fill": 0,
+          "linewidth": 3,
+          "points": false,
+          "pointradius": 5,
+          "bars": false,
+          "stack": false,
+          "spyable": true,
+          "zoomlinks": true,
+          "options": true,
+          "legend": true,
+          "show_query": true,
+          "interactive": true,
+          "legend_counts": true,
+          "timezone": "browser",
+          "percentage": false,
+          "zerofill": true,
+          "derivative": false,
+          "tooltip": {
+            "value_type": "cumulative",
+            "query_as_alias": true
+          },
+          "title": "Bids"
         }
       ],
       "notice": false
@@ -269,7 +354,8 @@
               0,
               1,
               2,
-              3
+              3,
+              4
             ]
           },
           "field_list": true,
@@ -300,6 +386,7 @@
       "query": "*",
       "pinned": true,
       "history": [
+        "*Bod geplaatst",
         "Severity:error",
         "Severity:fine*",
         "Severity:warning",
