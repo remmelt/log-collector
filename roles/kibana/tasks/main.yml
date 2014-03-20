@@ -1,15 +1,10 @@
 ---
-  - name: Install Nginx
-    apt: state=present name=nginx
-    sudo: yes
-    notify: Restart Nginx
-
   - name: Nginx conf
-    copy:
+    template:
       src=nginx_kibana.conf
       dest=/etc/nginx/conf.d/kibana.conf
     sudo: yes
-    notify: Restart Nginx
+    notify: Reload Nginx
 
   - name: Check for Kibana installation
     file:

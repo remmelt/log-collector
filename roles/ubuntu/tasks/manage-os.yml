@@ -5,8 +5,8 @@
   - name: Reload apt cache
     apt: update_cache=yes
 
-  - name: Update packages
-    apt: upgrade=safe
+  # - name: Update packages
+  #   apt: upgrade=safe
 
   - name: Install prerequisites
     apt:

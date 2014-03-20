@@ -1,13 +1,13 @@
 [queue]
-redis ansible_ssh_host=10.30.50.100
+redis.vagrant ansible_ssh_host=10.30.50.100
 
 [webhost]
-redis
+redis.vagrant
 
 [storage]
-es1 ansible_ssh_host=10.30.50.200 ip=10.30.50.200
-#es2 ansible_ssh_host=10.30.50.201
-#es3 ansible_ssh_host=10.30.50.202
+es1.vagrant ansible_ssh_host=10.30.50.200 ip=10.30.50.200
+#es2.vagrant ansible_ssh_host=10.30.50.201
+#es3.vagrant ansible_ssh_host=10.30.50.202
 
 [all:vars]
 ssh_username=vagrant
