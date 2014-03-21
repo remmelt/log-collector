@@ -12,16 +12,9 @@ Requirements
 First run
 ---------
 
-- ~~Install the Vagrant hostmanager plugin:  `vagrant plugin install vagrant-hostmanager`~~
-- ~~Bring up your virtual machines: `vagrant up`. This will ask for your sudo password so it can update your
-  `/etc/hosts` file.~~
-
-Currently the hostmanager plugin does not work with vagrant 1.5.0. Add to your `/etc/hosts`:
-```
-10.30.50.100	redis
-10.30.50.200	es1
-10.30.50.201	es2
-```
+- Install the Vagrant hostmanager plugin:  `vagrant plugin install vagrant-hostmanager`
+- Bring up your virtual machines: `vagrant up`. This will ask for your sudo password so it can update your
+  `/etc/hosts` file.
 
 
 Provisioning
@@ -42,7 +35,7 @@ We now have three machines, redis, es1 and es2.
 - redis runs redis, the logstash indexer and kibana through nginx. Nginx also proxies elasticsearch.
 - es1 and es2 run elasticsearch in a clustered configuration.
 
-Access kibana by surfing to [http://redis/](http://redis/) in your browser.
+Access kibana by surfing to [http://redis.vagrant/](http://redis.vagrant/) in your browser.
 
 Adding an elasticsearch machine is as simple as adding it in `/etc/hosts`, the Vagrantfile and the Ansible inventory, then running the `site.yml` playbook. The node will automatically join the ES cluster.
 
