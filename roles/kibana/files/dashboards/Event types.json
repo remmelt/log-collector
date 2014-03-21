@@ -37,7 +37,7 @@
           "pin": true,
           "type": "lucene",
           "enable": true,
-          "query": "Severity:SEVERE"
+          "query": "Severity:severe"
         },
         "4": {
           "id": 4,

@@ -5,13 +5,13 @@ redis.vagrant ansible_ssh_host=10.30.50.100
 redis.vagrant
 
 [storage]
-es1.vagrant ansible_ssh_host=10.30.50.200 ip=10.30.50.200
-#es2.vagrant ansible_ssh_host=10.30.50.201
-#es3.vagrant ansible_ssh_host=10.30.50.202
+es1.vagrant ip=10.30.50.200
+# TODO check if it is possible to get the IP on AWS, then remove the ip= param
+#es2.vagrant ip=10.30.50.201
+#es3.vagrant ip=10.30.50.202
 
 [all:vars]
 ssh_username=vagrant
 queue_host=10.30.50.100
 storage_cluster=10.30.50.100
-fake_dns=true
 manage_os=true

@@ -26,4 +26,12 @@ Vagrant.configure("2") do |config|
     end
   end
 
+  # Manage /etc/hosts on host and VMs
+  config.hostmanager.enabled = true
+  config.hostmanager.manage_host = true
+  config.hostmanager.include_offline = true
+  config.hostmanager.ignore_private_ip = false
+
+  config.vm.provision :hostmanager
+
 end
