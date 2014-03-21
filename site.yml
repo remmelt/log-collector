@@ -4,7 +4,6 @@
   user: '{{ ssh_username }}'
   roles:
   - ubuntu
-  - fake-dns
 
 - hosts: storage
   user: '{{ ssh_username }}'
