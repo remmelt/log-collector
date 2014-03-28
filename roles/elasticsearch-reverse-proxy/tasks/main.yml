@@ -2,6 +2,13 @@
   - name: Nginx conf
     template:
       src=nginx_proxy_es.conf
-      dest=/etc/nginx/conf.d/nginx_proxy_es.conf
+      dest=/etc/nginx/sites-available/nginx_proxy_es.conf
     sudo: yes
+
+  - name: Nginx conf link
+    file:
+      state=link
+      name=/etc/nginx/sites-enabled/nginx_proxy_es.conf
+      src=/etc/nginx/sites-available/nginx_proxy_es.conf
     notify: Reload Nginx
+    sudo: yes

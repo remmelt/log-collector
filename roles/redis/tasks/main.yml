@@ -12,3 +12,34 @@
   - name: Ensure Redis is running
     service: name=redis-server state=started
     sudo: yes
+
+  - name: Install stunnel
+    apt: state=present name=stunnel4
+    sudo: yes
+
+  - name: Stunnel config
+    copy:
+      src=stunnel.conf
+      dest=/etc/stunnel/stunnel.conf
+      owner=root
+      group=root
+    sudo: yes
+    notify: Restart Stunnel
+
+  - name: Stunnel certificate
+    copy:
+      src=stunnel.pem
+      dest=/etc/stunnel/stunnel.pem
+      owner=root
+      group=root
+      mode=0600
+    sudo: yes
+    notify: Restart Stunnel
+
+  - name: Start stunnel on boot
+    lineinfile:
+      state=present
+      name=/etc/default/stunnel4
+      line=ENABLED=1
+      regexp='^ENABLED=.*'
+    sudo: yes

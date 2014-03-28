@@ -15,9 +15,11 @@
   roles:
   - kibana
   - elasticsearch-reverse-proxy
+  tags: webhost
 
 - hosts: queue
   user: '{{ ssh_username }}'
   roles:
   - redis
   - indexer
+  tags: queue

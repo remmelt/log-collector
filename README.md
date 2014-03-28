@@ -16,6 +16,15 @@ First run
 - Bring up your virtual machines: `vagrant up`. This will ask for your sudo password so it can update your
   `/etc/hosts` file.
 
+Generate an stunnel certificate. You will need this on the log shipping nodes as well.
+```
+openssl genrsa -out key.pem 2048
+openssl req -new -x509 -key key.pem -out cert.pem -days 1095
+cat key.pem cert.pem >> stunnel.pem
+```
+Place the resulting stunnel.pem in `roles/redis/files/stunnel.pem`.
+
+
 
 Provisioning
 ------------
@@ -34,10 +43,13 @@ We now have three machines, redis, es1 and es2.
 
 - redis runs redis, the logstash indexer and kibana through nginx. Nginx also proxies elasticsearch.
 - es1 and es2 run elasticsearch in a clustered configuration.
+- Communication with redis happens over stunnel, port 6380
 
 Access kibana by surfing to [http://redis.vagrant/](http://redis.vagrant/) in your browser.
 
-Adding an elasticsearch machine is as simple as adding it in `/etc/hosts`, the Vagrantfile and the Ansible inventory, then running the `site.yml` playbook. The node will automatically join the ES cluster.
+On the shipper nodes, create an stunnel to redis:6380 and output your logs to localhost:6379 (or whatever you configure in the sending end stunnel.)
+
+Adding an elasticsearch machine is as simple as adding it in `/etc/hosts`, the Vagrantfile, and the Ansible inventory, then running the `site.yml` playbook. The node will automatically join the ES cluster.
 
 
 Glassfish 4 configuration
@@ -63,14 +75,15 @@ Start logstash with `agent -f shipper-gelf.conf` to begin shipping GELF logs to 
 Logstash currently talks to localhost with the provided shipper configuration. Either change this to put the correct host or create a reverse tunnel using `ssh -R...`.
 
 
+Security considerations
+-----------------------
+
+Sending logs to redis is SSL encrypted by the stunnel.
+Unless you want open access to your logs, you should further limit access to ports 80 en 9200 to a set of known IPs, set these (and other server configs) in the `host_vars` under `nginx.server_config`. You can additionally configure firewall rules, htaccess auth, or anything else.
+
+
 Further reading
 ---------------
 
-- [Logstash documentation](http://logstash.net/docs/1.3.3/tutorials/getting-started-centralized)
+- [Logstash documentation](http://logstash.net/docs/1.4.0/tutorials/getting-started-centralized)
 - [Bigdesk ES cluster overview](http://bigdesk.org/v/)
-
-
-TODO
-----
-
-- Security

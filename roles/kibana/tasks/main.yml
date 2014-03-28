@@ -2,9 +2,23 @@
   - name: Nginx conf
     template:
       src=nginx_kibana.conf
-      dest=/etc/nginx/conf.d/kibana.conf
+      dest=/etc/nginx/sites-available/kibana.conf
     sudo: yes
+
+  - name: Nginx conf link
+    file:
+      state=link
+      dest=/etc/nginx/sites-enabled/kibana.conf
+      src=/etc/nginx/sites-available/kibana.conf
     notify: Reload Nginx
+    sudo: yes
+
+  - name: Ensure the default Nginx site is not enabled
+    file:
+      state=absent
+      name=/etc/nginx/sites-enabled/default
+    notify: Reload Nginx
+    sudo: yes
 
   - name: Check for Kibana installation
     file:

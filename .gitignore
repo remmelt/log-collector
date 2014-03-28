@@ -4,4 +4,4 @@
 .project
 inventories/aws
 host_vars/redis.yml
-
+*.pem

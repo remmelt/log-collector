@@ -2,3 +2,7 @@
 - name: Restart Redis
   service: name=redis-server state=restarted
   sudo: yes
+
+- name: Restart Stunnel
+  service: name=stunnel4 state=restarted
+  sudo: yes
