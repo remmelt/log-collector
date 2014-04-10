@@ -1,17 +1,22 @@
 [queue]
-redis.vagrant ansible_ssh_host=10.30.50.100
+redis.vagrant
 
 [webhost]
 redis.vagrant
 
 [storage]
 es1.vagrant ip=10.30.50.200
-# TODO check if it is possible to get the IP on AWS, then remove the ip= param
 #es2.vagrant ip=10.30.50.201
 #es3.vagrant ip=10.30.50.202
 
 [all:vars]
 ssh_username=vagrant
+
+# This needs to be the externally accessible uri that the Nginx server will run on.
 queue_host=10.30.50.100
+
+# The balanced IP address of the Elasticsearch cluster, needs to be accessible from the Nginx host.
 storage_cluster=10.30.50.100
+
+# Do some basic OS management tasks.
 manage_os=true

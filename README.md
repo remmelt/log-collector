@@ -16,15 +16,6 @@ First run
 - Bring up your virtual machines: `vagrant up`. This will ask for your sudo password so it can update your
   `/etc/hosts` file.
 
-Generate an stunnel certificate. You will need this on the log shipping nodes as well.
-```
-openssl genrsa -out key.pem 2048
-openssl req -new -x509 -key key.pem -out cert.pem -days 1095
-cat key.pem cert.pem >> stunnel.pem
-```
-Place the resulting stunnel.pem in `roles/redis/files/stunnel.pem`.
-
-
 
 Provisioning
 ------------
@@ -43,13 +34,12 @@ We now have three machines, redis, es1 and es2.
 
 - redis runs redis, the logstash indexer and kibana through nginx. Nginx also proxies elasticsearch.
 - es1 and es2 run elasticsearch in a clustered configuration.
-- Communication with redis happens over stunnel, port 6380
 
 Access kibana by surfing to [http://redis.vagrant/](http://redis.vagrant/) in your browser.
 
-On the shipper nodes, create an stunnel to redis:6380 and output your logs to localhost:6379 (or whatever you configure in the sending end stunnel.)
+On the shipper nodes, output your logs to the redis host on port 6379.
 
-Adding an elasticsearch machine is as simple as adding it in `/etc/hosts`, the Vagrantfile, and the Ansible inventory, then running the `site.yml` playbook. The node will automatically join the ES cluster.
+Adding an elasticsearch machine is as simple as adding it in the Vagrantfile and the Ansible inventory, then running the `site.yml` playbook. The node will automatically join the ES cluster.
 
 
 Glassfish 4 configuration
@@ -78,7 +68,7 @@ Logstash currently talks to localhost with the provided shipper configuration. E
 Security considerations
 -----------------------
 
-Sending logs to redis is SSL encrypted by the stunnel.
+Sending logs to redis should probably be encrypted, use a VPN.
 Unless you want open access to your logs, you should further limit access to ports 80 en 9200 to a set of known IPs, set these (and other server configs) in the `host_vars` under `nginx.server_config`. You can additionally configure firewall rules, htaccess auth, or anything else.
 
 
