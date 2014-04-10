@@ -1,5 +1,4 @@
 ---
-
 - hosts: all
   user: '{{ ssh_username }}'
   roles:
@@ -9,6 +8,7 @@
   user: '{{ ssh_username }}'
   roles:
   - elasticsearch
+  tags: storage
 
 - hosts: webhost
   user: '{{ ssh_username }}'
