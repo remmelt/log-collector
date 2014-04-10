@@ -13,6 +13,7 @@ output {
     protocol => "http"
     host => "{{ storage_cluster }}"
 #    cluster => "elasticsearch" xxxx
+    index => "logstash-%{env}-%{+YYYY.MM.dd}"
   }
 }
 

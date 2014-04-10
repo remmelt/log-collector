@@ -30,6 +30,8 @@ This requires a known private key, add it to your ssh-agent with `ssh-add ~/.vag
 Result
 ------
 
+Send log messages to redis with added field: "test" (see shipper-gelf.conf example file.) This field will be used to write different environment log messages into different Elasticsearch indexes.
+
 We now have three machines, redis, es1 and es2.
 
 - redis runs redis, the logstash indexer and kibana through nginx. Nginx also proxies elasticsearch.

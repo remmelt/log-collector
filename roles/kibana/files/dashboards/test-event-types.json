@@ -1,5 +1,5 @@
 {
-  "title": "Event types",
+  "title": "[test] Event types",
   "services": {
     "query": {
       "list": {
@@ -382,7 +382,7 @@
   "failover": false,
   "index": {
     "interval": "day",
-    "pattern": "[logstash-]YYYY.MM.DD",
+    "pattern": "[logstash-test-]YYYY.MM.DD",
     "default": "NO_TIME_FILTER_OR_INDEX_PATTERN_NOT_MATCHED",
     "warm_fields": true
   },

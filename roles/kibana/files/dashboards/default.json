@@ -37,9 +37,9 @@
           "type": "text",
           "loadingEditor": false,
           "mode": "markdown",
-          "content": "[Event types](index.html#/dashboard/file/Event%20types.json)\n\n[Default logstash dashboard](index.html#/dashboard/file/logstash.json)",
+          "content": "[Event types](index.html#/dashboard/file/test-event-types.json)",
           "style": {},
-          "title": "Links"
+          "title": "Test"
         }
       ],
       "notice": false
