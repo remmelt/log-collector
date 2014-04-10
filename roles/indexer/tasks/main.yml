@@ -24,7 +24,7 @@
 
 - name: Copy logstash.conf
   template:
-    src=indexer.conf
+    src=indexer.conf.j2
     dest=/etc/logstash/conf.d/logstash.conf
     owner=logstash
     group=logstash

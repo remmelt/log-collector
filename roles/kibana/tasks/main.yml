@@ -1,7 +1,7 @@
 ---
   - name: Nginx conf
     template:
-      src=nginx_kibana.conf
+      src=nginx_kibana.conf.j2
       dest=/etc/nginx/sites-available/kibana.conf
     sudo: yes
 
@@ -50,7 +50,7 @@
 
   - name: Edit Kibana config
     template:
-      src=kibana_config.js
+      src=kibana_config.js.j2
       dest=/usr/share/nginx/kibana/config.js
     sudo: yes
 

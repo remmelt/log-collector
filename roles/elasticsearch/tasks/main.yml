@@ -24,7 +24,7 @@
 
 - name: Elasticsearch configuration
   template:
-    src=elasticsearch.yml
+    src=elasticsearch.yml.j2
     dest=/etc/elasticsearch/elasticsearch.yml
   sudo: yes
   notify: Restart Elasticsearch
