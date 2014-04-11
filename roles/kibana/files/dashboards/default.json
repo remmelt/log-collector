@@ -40,6 +40,17 @@
           "content": "[Event types](index.html#/dashboard/file/test-event-types.json)",
           "style": {},
           "title": "Test"
+        },
+        {
+          "error": false,
+          "span": 4,
+          "editable": true,
+          "type": "text",
+          "loadingEditor": false,
+          "mode": "markdown",
+          "content": "[Event types](index.html#/dashboard/file/test2-event-types.json)",
+          "style": {},
+          "title": "Test 2"
         }
       ],
       "notice": false

@@ -58,6 +58,9 @@
     copy:
       src="{{ item }}"
       dest="/usr/share/nginx/kibana/app/dashboards/{{ item | basename }}"
+      mode=0644
+      owner=root
+      group=root
     with_fileglob:
       - ./dashboards/*
     tags: copy_dashboards
