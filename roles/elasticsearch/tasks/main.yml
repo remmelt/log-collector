@@ -1,7 +1,7 @@
 ---
 - name: Install dependencies
   apt: state=present name=openjdk-7-jre-headless
-  sudo: true
+  sudo: yes
 
 - name: Install Elasticsearch apt key
   apt_key:
@@ -22,19 +22,28 @@
     state=present
   sudo: yes
 
+- name: Ensure data directory exists
+  file:
+    state=directory
+    path=/opt/data/elasticsearch
+    owner=elasticsearch
+    group=elasticsearch
+    mode=0755
+  sudo: yes
+
 - name: Elasticsearch configuration
   template:
     src=elasticsearch.yml.j2
     dest=/etc/elasticsearch/elasticsearch.yml
-  sudo: yes
   notify: Restart Elasticsearch
+  sudo: yes
 
 - name: Elasticsearch logging configuration
   copy:
     src=logging.yml
     dest=/etc/elasticsearch/logging.yml
-  sudo: yes
   notify: Restart Elasticsearch
+  sudo: yes
 
 - name: Ensure Elasticsearch is running
   service: name=elasticsearch state=started
