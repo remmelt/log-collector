@@ -51,6 +51,28 @@
           "content": "[Event types](index.html#/dashboard/file/test2-event-types.json)",
           "style": {},
           "title": "Test 2"
+        },
+        {
+          "error": false,
+          "span": 4,
+          "editable": true,
+          "type": "text",
+          "loadingEditor": false,
+          "mode": "markdown",
+          "content": "[Event types](index.html#/dashboard/file/acc-event-types.json)",
+          "style": {},
+          "title": "Acc"
+        },
+        {
+          "error": false,
+          "span": 4,
+          "editable": true,
+          "type": "text",
+          "loadingEditor": false,
+          "mode": "markdown",
+          "content": "[Event types](index.html#/dashboard/file/prod-event-types.json)",
+          "style": {},
+          "title": "Prod"
         }
       ],
       "notice": false

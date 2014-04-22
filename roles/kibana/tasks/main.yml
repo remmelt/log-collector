@@ -54,6 +54,21 @@
       dest=/usr/share/nginx/kibana/config.js
     sudo: yes
 
+  - name: Copy dashboard templates
+    template:
+      src="event-types.json.j2"
+      dest="/usr/share/nginx/kibana/app/dashboards/{{ item }}-event-types.json"
+      mode=0644
+      owner=root
+      group=root
+    with_items:
+      - test
+      - test2
+      - acc
+      - prod
+    tags: copy_dashboards
+    sudo: yes
+
   - name: Copy dashboards
     copy:
       src="{{ item }}"
