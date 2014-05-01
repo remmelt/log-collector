@@ -5,9 +5,9 @@ redis.vagrant
 redis.vagrant
 
 [storage]
-es1.vagrant ip=10.30.50.200
-#es2.vagrant ip=10.30.50.201
-#es3.vagrant ip=10.30.50.202
+es1.vagrant
+#es2.vagrant
+#es3.vagrant
 
 [all:vars]
 ssh_username=vagrant
