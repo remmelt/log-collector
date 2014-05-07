@@ -38,6 +38,15 @@
   notify: Restart Elasticsearch
   sudo: yes
 
+- name: Elasticsearch default settings
+  lineinfile:
+    state=present
+    name=/etc/default/elasticsearch
+    line=ES_HEAP_SIZE=2g
+    regexp='^ES_HEAP_SIZE=.*'
+  notify: Restart Elasticsearch
+  sudo: yes
+
 - name: Elasticsearch logging configuration
   copy:
     src=logging.yml
@@ -46,5 +55,5 @@
   sudo: yes
 
 - name: Ensure Elasticsearch is running
-  service: name=elasticsearch state=started
+  service: name=elasticsearch state=started enabled=yes
   sudo: yes
