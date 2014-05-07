@@ -11,7 +11,7 @@ server {
 {% endfor %}
 
     listen 9200;
-    server_name _;
+    server_name {{ kibana_server_name }};
     access_log            /var/log/nginx/elasticsearch.reverse.access.log;
     client_max_body_size 50m;
 

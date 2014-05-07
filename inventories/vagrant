@@ -12,6 +12,9 @@ es1.vagrant
 [all:vars]
 ssh_username=vagrant
 
+# The domain name that the kibana nginx vhost should listen to
+kibana_server_name=_
+
 # This needs to be the externally accessible uri that the Nginx server will run on.
 queue_host=10.30.50.100
 
