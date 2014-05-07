@@ -8,6 +8,12 @@ input {
   }
 }
 
+filter {
+  if [type] == "apache-access" {
+    drop { }
+  }
+}
+
 output {
   elasticsearch {
     protocol => "http"
@@ -16,4 +22,3 @@ output {
     index => "logstash-%{env}-%{+YYYY.MM.dd}"
   }
 }
-
