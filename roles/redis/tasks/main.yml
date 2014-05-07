@@ -12,4 +12,3 @@
   - name: Ensure Redis is running
     service: name=redis-server state=started
     sudo: yes
-
