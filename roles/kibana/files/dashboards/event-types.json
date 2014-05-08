@@ -494,7 +494,7 @@
             "host",
             "message",
             "Severity",
-            "type"
+            "Time"
           ],
           "localTime": true,
           "timeField": "@timestamp",
