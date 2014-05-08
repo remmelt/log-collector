@@ -3,6 +3,7 @@
     template:
       src=nginx_proxy_es.conf.j2
       dest=/etc/nginx/sites-available/nginx_proxy_es.conf
+    notify: Reload Nginx
     sudo: yes
 
   - name: Nginx conf link
