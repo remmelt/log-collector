@@ -103,14 +103,23 @@
           "type": "querystring",
           "query": "Severity:severe",
           "mandate": "must",
-          "active": true,
+          "active": false,
           "alias": "",
           "id": 1
+        },
+        "2": {
+          "type": "querystring",
+          "query": "host:s3296",
+          "mandate": "must",
+          "active": false,
+          "alias": "",
+          "id": 2
         }
       },
       "ids": [
         0,
-        1
+        1,
+        2
       ]
     }
   },
