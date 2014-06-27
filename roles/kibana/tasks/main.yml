@@ -23,16 +23,16 @@
   - name: Check for Kibana installation
     file:
       state=file
-      name=/usr/share/nginx/kibana-3.0.0milestone5/config.js
+      name=/usr/share/nginx/kibana-3.1.0/config.js
     register: kibana_install_present
     sudo: yes
     ignore_errors: true
 
   - name: Download Kibana
     get_url:
-      url=http://download.elasticsearch.org/kibana/kibana/kibana-3.0.0milestone5.tar.gz
+      url=https://download.elasticsearch.org/kibana/kibana/kibana-3.1.0.tar.gz
       dest=/tmp/kibana.tar.gz
-      sha256sum=c17c3c86c57b249d5188125ed20a01cd97347d32fddcbe05a35a663b76020dc3
+      sha256sum=059a4b6b507b9ff771901d12035e499b0e8d1cae7d9e5284633e19da6c294e07
     sudo: yes
     when: kibana_install_present.state == 'absent'
 
@@ -44,7 +44,7 @@
   - name: Create Kibana directory link
     file:
       state=link
-      src=/usr/share/nginx/kibana-3.0.0milestone5
+      src=/usr/share/nginx/kibana-3.1.0
       dest=/usr/share/nginx/kibana
     sudo: yes
 

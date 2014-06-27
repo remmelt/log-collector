@@ -11,15 +11,16 @@
 
 - name: Add Elasticsearch repository
   apt_repository:
-    repo="deb http://packages.elasticsearch.org/elasticsearch/1.1/debian stable main"
+    repo="deb http://packages.elasticsearch.org/elasticsearch/1.2/debian stable main"
     update_cache=yes
     state=present
   sudo: yes
 
 - name: Install Elasticsearch
   apt:
-    pkg=elasticsearch
+    name=elasticsearch=1.2.1
     state=present
+  notify: Restart Elasticsearch
   sudo: yes
 
 - name: Ensure data directory exists
